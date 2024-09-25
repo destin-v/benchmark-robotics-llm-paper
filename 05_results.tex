@@ -1,0 +1,93 @@
+\section{Results}
+
+\begin{table*}[h]
+    \centering
+    % \fontfamily{ppl}
+    \begin{tabular}{lllrrrr}
+        \toprule
+        Model              & Planner       & Observability & Sim Steps ↓ & Success Rate ↑      & Percent Complete ↑ & Planning Cycles ↓
+        \\
+        \midrule
+        Llama 3 8B         & Centralized   & Full          & 1338 ± 579  & 0.38± 0.5           & 56 \%              & 15.19 ± 5.8       \\
+        Llama 3 8B         & Centralized   & Partial       & 2009 ± 2197 & 0.3 ± 0.5           & 46 \%              & 17.28 ± 9.5       \\
+        Llama 3 8B         & Decentralized & Full          & 2856 ± 2724 & 0.37 ± 0.5          & 65 \%              & 18.08 ± 11        \\
+        Llama 3 8B         & Decentralized & Partial       & 3400 ± 2910 & 0.41 ± 0.5          & 66 \%              & 16.55 ± 10.4      \\
+        \midrule
+        Llama 3.1 70B      & Centralized   & Full          & 1347 ± 33   & 0.74 ± 0.01         & 88 \%              & 17 ± 0.3          \\
+        Llama 3.1 70B      & Centralized   & Partial       & 2298 ± 61   & 0.74 ± 0.01         & 85 \%              & 20 ± 0.5          \\
+        Llama 3.1 70B      & Decentralized & Full          & -           & -                   & -                  & -                 \\
+        Llama 3.1 70B      & Decentralized & Partial       & 3295 ± 76   & 0.73 ± 0.01         & 86 \%              & 15 ± 0.3          \\
+        \midrule
+        Llama 3.0 70B      & Centralized   & Full          & 1740 ± 1333 & 0.72 ± 0.4          & 84 \%              & 16.62 ± 7.6       \\
+        Llama 3.0 70B      & Centralized   & Partial       & 2378 ± 1148 & 0.75 ± 0.4          & 84 \%              & 18.75±7.5         \\
+        Llama 3.0 70B      & Decentralized & Full          & 2764 ± 2381 & 0.67 ± 0.5          & 84 \%              & 15.27 ± 8.2       \\
+        Llama 3.0 70B      & Decentralized & Partial       & 4001 ± 3007 & 0.71 ± 0.5          & 82 \%              & 16.85 ± 9.3       \\
+        \midrule
+        GPT-4o             & Centralized   & Full          & 1144 ± 1477 & 0.69 ± 0.5          & 82 \%              & 11 ± 14.2         \\
+        GPT-4o             & Centralized   & Partial       & 2036 ± 1192 & 0.72 ± 0.5          & 85 \%              & 13 ± 15.9         \\
+        GPT-4o             & Decentralized & Full          & 1831 ± 2046 & 0.77 ± 0.4          & 88 \%              & 9 ± 8.8           \\
+        GPT-4o             & Decentralized & Partial       & 5375 ± 4105 & 0.73 ± 0.4          & 86 \%              & 11 ± 10.1         \\
+        \midrule
+        o3-mini            & Centralized   & Full          & 2347 ± 1361 & \textbf{0.81 ± 0.4} & \textbf{89 \%}     & 16 ± 11.3         \\
+        o3-mini            & Centralized   & Partial       & 2815 ± 2557 & \textbf{0.77 ± 0.4} & \textbf{86 \%}     & 16 ± 17.6         \\
+        o3-mini            & Decentralized & Full          & 1952 ± 1524 & \textbf{0.78 ± 0.4} & \textbf{89 \%}     & 8 ± 7.3           \\
+        o3-mini            & Decentralized & Partial       & 4977 ± 2534 & \textbf{0.77 ± 0.4} & \textbf{92 \%}     & 9 ± 5.9           \\
+        \midrule
+        Deepseek-Llama-70B & Centralized   & Full          & 1711 ± 2991 & 0.56 ± 0.5          & 72 \%              & 27 ± 30.4         \\
+        Deepseek-Llama-70B & Centralized   & Partial       & 2397 ± 1707 & 0.56 ± 0.5          & 70 \%              & 23 ± 21.8         \\
+        Deepseek-Llama-70B & Decentralized & Full          & 2112 ± 1956 & 0.71 ± 0.5          & 84 \%              & 15 ± 10.6         \\
+        Deepseek-Llama-70B & Decentralized & Partial       & 4293 ± 4304 & 0.65 ± 0.5          & 82 \%              & 15 ± 10.5         \\
+        \bottomrule
+    \end{tabular}
+    \caption{Bolded numbers indicate best.}
+    \label{tab:results}
+\end{table*}
+
+For each test case, we list the model under test, the planner type, the observability, and the metrics.  We include a one sigma standard deviation for key metrics to show the variability.  See Table~\ref{tab:results} for our results.
+
+Non-reasoning models such as GPT-4o and Llama 3 try to one-shot the problem and proceed.  If the plan fails, the models need to replan.  Non-reasoning models exhibit a lower percentage of completing their task, but they appear to complete them faster as shown in their sim steps.  If we think about why this is, we know that non-reasoning models are faster and iterate more quickly.  They are able to react to the simulation at a faster rate even if their actions have a lower success rate.
+
+When we compare the non-reasoning models against a reasoning model such as o3-mini we see some interesting results.  O3-mini has higher episode percentage completion across the board.  We also see that each action taken by o3-mini has a higher success rate when compared to GPT-4o or Llama 3.1.  Unfortunately, o3-mini takes longer to make a decision which results in longer sim steps.  The trade-off of using reasoning models like o3-mini is that we pay a higher cost in sim steps for a better success rate and higher percentage of episode completion.
+
+Based on these preliminary results, we would expect that reasoning models should outperform if time is a non-factor.  Reasoning models double-check their work and work out multiple solutions before choosing which one to execute.  This is analogous to Daniel Kanhneman's\cite{Kahneman:2011fj} System 1 versus System 2 thinking.  System 1 is reactive and immediate whereas System 2 must consider multiple possibilities and evaluate each possibility individually.
+
+When we benchmarked DeepSeek-Llama-70B we saw that it underperformed Llama 3 70B.  This would contradict our earlier assessment that reasoning models are superior.  However, DeepSeek-Llama-70B is a base Llama 70B model which has been distilled from DeepSeek R1.  DeepSeek-Llama-70B does not have Multi-Head Latent Attention\cite{deepseekai2024deepseekv2strongeconomicalefficient} or Mixture of Experts\cite{dai2024deepseekmoeultimateexpertspecialization} present in DeepSeek R1.  While distillation is helpful in structuring a model's output to follow a CoT process, DeepSeek-Llama-70B should be viewed as a deprecated and miniaturized DeepSeek R1 which is not representative of frontier reasoning models.
+
+We provide an example~\ref{ex:deepseek-planning} of DeepSeek-Llama-70B's reasoning to see how an agent can think about a problem.  We can see from DeepSeek-Llama-70B's internal thought process, it correctly breaks down the problem step by step.  It realizes that the sushi mat is hidden and that it needs to find where it is.  The model also identifies the correct action syntax "EXPLORE" that needs to be performed in the kitchen in order to find the sushi mat.
+
+The LLMs under test would often have an incorrect spatial understanding of where they are relative to the object they want to interact with as shown in example~\ref{ex:failed_pickup} (red text).  In our example, the simulator outputs a response to the agent stating that it is not close enough to the object.  The LLM is able to recover from the error and fix the problem.  This type of spatial misunderstanding was prevalent across every LLM we tested.
+
+The o3-mini model does not output its thought process, thus we were not able to identify errors in its planning.  But based on the actions we observed from o3-mini it was clear that it struggled with spatial understanding.  The simulator would often provide a helpful text response that allowed the LLMs to recover and continue.  In general, the more complex the spatial understanding needed to solve a task, the worse the LLMs would perform.
+
+\begin{Example}{Example: DeepSeek Llama 70B - Thought Process}{example-deepseek-planning}
+
+    \textbf{Task:} Move the sushi mat from the kitchen counter to the living room table. \\
+
+    \textbf{Thought:} Alright, so I'm trying to figure out how to move the sushi mat from the kitchen counter to the living room table. Let's break this down step by step. First, I know that the sushi mat is an object, and according to the problem, I haven't found any objects yet. That means I need to start by locating the sushi mat. \\
+
+    Looking at the furniture list, the sushi mat is likely to be on the kitchen counter, which is counter\_34 in kitchen\_1. So, my first thought is that I need to explore the kitchen to find the sushi mat. The Explore action is used to search a specific room thoroughly, so that makes sense here. By exploring kitchen\_1, I can check all the relevant spots where the sushi mat might be. \\
+
+    I remember that each room doesn't need to be explored more than once, so if I don't find the sushi mat in the kitchen, I'll move on to the next room. But since the task specifies that the sushi mat is on the kitchen counter, I can focus my efforts there first. \\
+
+    Once I find the sushi mat, I'll need to pick it up using the Pick action. Then, I'll navigate to the living room table, which is either table\_14 or table\_15. After that, I'll place the sushi mat on the table using the Place action. \\
+
+    But before all that, the first logical step is to Explore[kitchen\_1] to locate the sushi mat...
+
+\end{Example}\label{ex:deepseek-planning}
+
+\begin{Example}{Example: DeepSeek Llama 70B - Spatial Confusion}{example-pickup-fail}
+
+    \textbf{Thought:} The sushi mat has been found on the kitchen counter. I need to pick it up to move it to the living room table. \\
+    \textbf{Action:} Pick[sushi\_mat\_0] \\
+
+    \textbf{Result:} \textcolor{red}{Unexpected failure! - Failed to pick! Not close enough to the object.} \\
+    \textbf{Objects:} multiport\_hub\_3: shelves\_24 in closet\_1 \\
+    glass\_2: shelves\_25 in closet\_1 \\
+    sushi\_mat\_0: counter\_34 in kitchen\_1 \\
+    bottle\_1: shelves\_25 in closet \\
+
+    \textbf{Thought:} I wasn't close enough to pick up the sushi mat. I need to navigate to the kitchen counter first. \\
+    \textbf{Action:} Navigate[counter\_34]
+
+\end{Example}\label{ex:failed_pickup}
+

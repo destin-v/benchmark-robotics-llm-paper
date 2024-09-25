@@ -1,0 +1,22 @@
+\section{Discussion}
+
+When running the experiments, we identified several problems areas where LLMs struggled when given a generated task.  These problems can be categorized as: order of operations, spatial understanding, syntax, suboptimal planning, partial observability, and early stopping.  While these categories do not encompass every possible failure case, they cover the majority of the issues we encountered.  A full description of each is provided below:
+
+\begin{itemize}
+      \item \textbf{Order of Operations:}
+            Agents would often get confused regarding spatial understanding of objects.  In general, agents would need to navigate to an object in order to interact with it.  We observed agents trying to pick up objects in different rooms which they had not navigated to.  Sometimes agents would try to move, place, or rearrange an object it was not holding.
+      \item \textbf{Spatial understanding:}
+            At times the agents would appear to be confused as to where they were located in the environment.  This confusion led to behaviors where agents would try to interact with items in another room which is not possible.
+      \item \textbf{Syntax:}
+            Agents would often get confused by the syntax needed to perform an operation.  Most of the LLMs we tested were trained to code on popular programming languages prevalent on the internet.  However, PARTNR required its own custom syntax when operating robotic agents in simulated environments.  Even though the syntax was provided to the LLMs in the prompt, it would often get confused how to properly use it.
+      \item \textbf{Suboptimal Planning:}
+            Agents would often plan suboptimally, meaning they could accomplish the task much faster if they correctly utilized both robotic agents with balanced loads.  Often the actions assigned were unbalanced meaning one robotic agents had tasks to perform while the other agent was idle.
+      \item \textbf{Partial Observability:}
+            Agents would get confused by tasks that required finding hidden objects in the environment.  For example a task that required moving the sushi mat from the kitchen counter to the living room table would require first finding the sushi mat.  LLMs would sometimes try interacting with the sushi mat without realizing it needed to explore the kitchen to discover the location of the sushi mat first.
+      \item \textbf{Early Stopping:}
+            Agents would sometimes output "DONE" before all tasks have been complete.  This would result in a failed episode because the task was incomplete when the agent stopped the episode.
+\end{itemize}
+
+We noticed that larger LLMs generally outperformed smaller LLMs.  This was evident from the smallest model we tested (Llama 3 8B), which underperformed in all test cases.  It is estimated that The o3-mini model is closed source, so we have no insight regarding its parameter count.  However, a source from HuggingFace\cite{huggingface2025o3mini} estimates that o3-mini has 200B parameters.
+
+For future work, it would be interesting to test with state-of-the art open-source models such as Alibaba QwQ 32B or DeepSeek R1 670B.  Alibaba's reasoning models are significantly smaller and can be run on commercial desktop Graphics Processing Units (GPU) whereas DeepSeek R1 provides frontier network architectures that are both performant and more efficient.

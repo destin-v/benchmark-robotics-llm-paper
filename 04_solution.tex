@@ -1,0 +1,17 @@
+\section{Experiment Design}
+
+For each test point, we ran the models for ten hours to gather statistics.  The number of episodes completed by each model in ten hours differs because reasoning models use more test time compute compared to non-reason models.  This will naturally lead to less completed episodes for reasoning models like o3-mini.  However, we provide a one sigma standard deviation for the test points, so readers can assess how much variability is around the mean.
+
+We track four different variables for evaluating agents: \textit{simulation steps}, \textit{success rate}, \textit{percent complete}, and \textit{planning cycles}.  Of the four metrics, the percent complete is the most important as it indicates the portion of episodes it completed correctly.  The other support metrics provide additional quantifier which can be helpful in assessing the performance of the agents.
+
+\begin{itemize}
+      \item \textbf{Sim Steps:}
+            The number of simulation steps until the end of an episode.  Even though there is no time limit to complete a task, agents that are able to achieve success in a shorter amount of steps is considered superior.
+      \item \textbf{Success Rate:}
+            Within an episode, the agents will be given multiple decision points.  During these decision points the agent must select an action to perform.  This metric is calculated as the number of successfully completed decisions divide by the total number of decision points.
+      \item \textbf{Percent Complete:}
+            This metric indicates the fraction of episodes where the agent successfully completed the task.  It is calculated as the fraction of successful episodes divided by total non-crashed episodes.
+      \item \textbf{Planning Cycles:}
+            Planning cycles is how often the agent needs to replan its actions within an episode.  Less replanning indicates that the agent is better at long-term planning.
+\end{itemize}
+

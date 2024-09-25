@@ -1,0 +1,10 @@
+PARTNR
+LLMs
+CoT
+DeepSeek
+Kanhneman
+OpenVLA
+OpenVLA
+PARNTR
+SoTA
+QwQ

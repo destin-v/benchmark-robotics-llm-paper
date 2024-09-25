@@ -1,0 +1,127 @@
+\usepackage{tcolorbox}
+\definecolor{lightnavy}{HTML}{F2F2F9}
+\definecolor{whitesmoke}{HTML}{F5F5F5}
+\definecolor{whitesmoke}{HTML}{FFFFFF}
+\definecolor{navyblue}{HTML}{00007B}
+\definecolor{lightgreen}{HTML}{F2FBF8}
+\definecolor{green}{HTML}{88D6D1}
+\definecolor{darkgreen}{HTML}{2A7F7F}
+\definecolor{lightpurple}{HTML}{E5E5FF}
+\definecolor{darkpurple}{HTML}{3F3FA3}
+\definecolor{black}{HTML}{000000}
+
+
+\tcbuselibrary{theorems,skins,hooks}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Tracked Boxes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtcbtheorem[number within=section]{Process}{Process}
+{%
+  enhanced
+  ,colback = white
+  ,boxrule = 0sp
+  ,borderline west = {5pt}{0pt}{black}
+  ,sharp corners
+  ,detach title
+  ,before upper = \tcbtitle\par\smallskip
+  ,coltitle = black
+  ,fonttitle = \bfseries\sffamily
+  ,description font = \mdseries
+  ,terminator sign dash
+  ,separator sign none
+}
+{th}
+
+
+\newtcbtheorem[number within=section]{Example}{Example}
+{%
+  enhanced
+  ,colback = lightnavy
+  ,frame hidden
+  ,boxrule = 0sp
+  ,borderline west = {5pt}{0pt}{navyblue}
+  ,sharp corners
+  ,detach title
+  ,before upper = \tcbtitle\par\smallskip
+  ,coltitle = navyblue
+  ,fonttitle = \bfseries\sffamily
+  ,description font = \mdseries
+  ,terminator sign dash
+  ,separator sign none
+}
+{th}
+
+
+
+% \newtcbtheorem[number within=section]{Example}{Example}
+%   {%
+%      colback = lightgreen
+%     ,colframe = green
+%     ,coltitle = darkgreen
+%     ,boxrule = 1pt
+%     ,sharp corners
+%     ,detach title
+%     ,before upper=\tcbtitle\par\smallskip
+%     ,fonttitle = \bfseries
+%     ,description font = \mdseries
+%     ,separator sign none
+%     ,description delimiters parenthesis
+%   }
+%   {ex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Definitions
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtcolorbox{Definition}[1]
+{
+  enhanced
+  ,colback = lightpurple
+  ,colframe = darkpurple
+  ,coltitle = darkpurple
+  ,colbacktitle = lightpurple
+  ,fonttitle = \bfseries
+  ,title = {#1}
+  ,attach boxed title to top right = {yshift = -5pt, xshift = -7mm}
+  ,boxed title style = { boxrule = .25mm }
+  ,arc = 5mm
+  ,interior code app =
+    {
+      \node
+      [
+        anchor=south west
+        ,line width = 0.5mm
+        ,rounded corners
+        ,inner sep = 5pt
+        ,draw = darkpurple
+        ,fill = lightpurple
+        ,yshift = -5pt%3.5pt
+        ,xshift = 7mm
+        ,text = darkpurple
+        ,font = \bfseries
+      ] at (frame.north west)
+      {\ Definition\ \null};
+    }
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Boxes
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtcolorbox{BlackBox}[1]
+{
+  enhanced
+  ,title = {#1}
+  ,arc = 5mm
+  ,colback = white
+  ,boxrule = 0sp
+  ,borderline west = {5pt}{0pt}{black}
+  ,sharp corners
+  ,detach title
+  ,before upper = \tcbtitle\par\smallskip
+  ,coltitle = black
+  ,fonttitle = \bfseries\sffamily
+  ,description font = \mdseries
+  ,terminator sign dash
+  ,separator sign none
+}

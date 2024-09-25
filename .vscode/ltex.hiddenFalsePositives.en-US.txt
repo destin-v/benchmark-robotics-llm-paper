@@ -1,0 +1,4 @@
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QExample Planning: Explore kitchen Navigate to kitchen counter34 Pickup sushimat Navigate to livingroom1 Put sushimat on table14\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QPowerOn: Used for turning on a powered object.\\E$"}
+{"rule":"MORFOLOGIK_RULE_EN_US","sentence":"^\\QPowerOff: Used for turning off a powered object.\\E$"}
+{"rule":"UPPERCASE_SENTENCE_START","sentence":"^\\Qppl Planner Observability Difficulty Centralized Full Easy Centralized Partial Moderate Decentralized Full Moderate Decentralized Partial Hard Design matrix for setting up experiments.\\E$"}
